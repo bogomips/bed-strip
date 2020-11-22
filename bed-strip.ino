@@ -4,7 +4,7 @@
 // arduino-cli compile --fqbn esp8266:esp8266:nodemcuv2 bed-lights.ino && arduino-cli upload -p /dev/cu.usbserial-14140  --fqbn esp8266:esp8266:nodemcuv2:baud=921600
 
 // arduino-cli compile --fqbn esp8266:esp8266:d1_mini_lite bed-lights.ino 
-// arduino-cli upload -p /dev/cu.usbserial-14130  --fqbn esp8266:esp8266:d1_mini_lite:baud=3000000
+// arduino-cli upload -p /dev/cu.usbserial-14440  --fqbn esp8266:esp8266:d1_mini_lite:baud=3000000
 // arduino-cli compile --fqbn esp8266:esp8266:d1_mini_lite bed-lights.ino && arduino-cli upload -p /dev/cu.usbserial-14340  --fqbn esp8266:esp8266:d1_mini_lite:baud=3000000
 // arduino-cli compile --fqbn esp8266:esp8266:d1_mini_lite bed-lights.ino && arduino-cli upload -p /dev/cu.usbserial-14140  --fqbn esp8266:esp8266:d1_mini_lite:baud=921600
 
@@ -45,8 +45,8 @@
 #endif
 
 struct wifiSetup {
-    char* ssid = "your_ssid";
-    char* password = "your_pass";
+     char* ssid = "your_ssid";
+     char* password = "your_pass";
 } wifiConfig;
 
 struct udpSetup {
@@ -165,7 +165,7 @@ void parseUdp(char* incomingPacket) {
     if (startsWith(incomingPacket, "0x")) {
 
         stripConfig.previous_color = stripConfig.current_color;
-        stripConfig.current_color = (int)strtol(udpConfig.incomingPacket, NULL, 0);
+        stripConfig.current_color = (long int)strtol(udpConfig.incomingPacket, NULL, 0);
     }
     else {
         #if VERBOSE 
@@ -266,6 +266,13 @@ void workingModeLoop() {
         strobo(65);
     else if (strcmp(stripConfig.working_mode,"nightmode") == 0) 
         nightmode();
+    else if (strcmp(stripConfig.working_mode,"italy") == 0) 
+        italy();
+    else if (strcmp(stripConfig.working_mode,"greece") == 0) 
+        greece();
+    else if (strcmp(stripConfig.working_mode,"germany") == 0) 
+        germany();
+
         
 
 }

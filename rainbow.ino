@@ -23,7 +23,7 @@ byte * Wheel(byte WheelPos) {
   return c;
 }
 
-void rainbowCycle(int SpeedDelay) { Serial.println("Rain ");
+void rainbowCycle(int SpeedDelay) {
   byte *c;
   uint16_t i, j;
 
